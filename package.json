@@ -1,0 +1,22 @@
+{
+  "name": "startrekchallenge",
+  "version": "1.0.0",
+  "description": "Display Start Trek episodes and their ratings",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juancafe4/StarTrekChallenge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juancafe4/StarTrekChallenge/issues"
+  },
+  "homepage": "https://github.com/juancafe4/StarTrekChallenge#readme",
+  "dependencies": {
+    "axios": "^0.15.3"
+  }
+}
