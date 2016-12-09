@@ -32,7 +32,7 @@ class Episode extends React.Component {
     }
     return (
       <Thumbnail src={imageLink}>
-        <h3>{title}</h3>
+        <h5>{title}</h5>
         <p>⭐{rating}/10</p>
         <p>
           <Button bsStyle="success">More Details</Button>
@@ -44,7 +44,7 @@ class Episode extends React.Component {
 
 Episode.propTypes = {
   title: React.PropTypes.string,
-  rating: React.PropTypes.string,
+  rating: React.PropTypes.number,
   id: React.PropTypes.string,
 };
 export default Episode;

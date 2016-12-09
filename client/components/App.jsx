@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {ProgressBar} from 'react-bootstrap';
+import {ProgressBar, Row, Col} from 'react-bootstrap';
 import Episode from './Episode';
 
 const URL = "http://www.omdbapi.com/?i=tt0092455&season=4&ref_=tt_eps_sn_4";
@@ -10,7 +10,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      episodes: null
+      episodes: null,
+      title: "",
+      season: "",
     };
   }
   componentDidMount() {
@@ -19,12 +21,12 @@ class App extends React.Component {
       let episodes = data["Episodes"].map((val) => {
         let obj = {};
         obj["Title"] = val["Title"];
-        obj["imdbRating"] = val["imdbRating"];
+        obj["imdbRating"] = Number(val["imdbRating"]);
         obj["imdbID"] = val["imdbID"];
         return obj;
       });
 
-      this.setState({episodes})
+      this.setState({episodes, title: data["Title"], season: data["Season"]})
     })
     .catch((error) =>
       console.log(error)
@@ -32,7 +34,7 @@ class App extends React.Component {
   }
 
   render() {
-    let {episodes} = this.state;
+    let {episodes, title, season} = this.state;
 
     if (!episodes) {
       return (
@@ -42,19 +44,29 @@ class App extends React.Component {
         </div>
       );
     }
-    
+
     let listEpisodes = episodes.map((val, index) =>
-      <Episode 
-        key={index + 1}
-        id={val["imdbID"]}
-        title={val["Title"]}
-        rating={val["imdbRating"]}
-      />
+      <Col key={index + 1} xs={10} md={4}>
+        <Episode 
+          id={val["imdbID"]}
+          title={val["Title"]}
+          rating={val["imdbRating"]}
+        />
+      </Col>
     );
     return (
-      <ul>
-        {listEpisodes}
-      </ul>
+      <div className="container">
+        <h2 className="text-center">{title}</h2>
+        <h4 className="text-center">Season: {season}</h4>
+        <Row> 
+          <Col xs={1} sm={1} md={1}>
+
+          </Col>
+          <Col xs={10} md={10}>
+            {listEpisodes}
+          </Col>
+        </Row>
+      </div>
     );
   }
 }
