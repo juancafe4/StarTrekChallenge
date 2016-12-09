@@ -27,7 +27,6 @@ class App extends React.Component {
       let filteredEpisodes = episodes.filter((ep) =>
         char === ep["Title"][0].toUpperCase()
       );
-      console.log(filteredEpisodes)
       this.setState({filteredEpisodes})
     }
   }

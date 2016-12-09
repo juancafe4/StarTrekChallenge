@@ -9,17 +9,32 @@ class Episode extends React.Component {
     super(props);
     this.state = {
       imageLink: null,
+      id: '',
     };
   }
   componentDidMount() {
     let { id } = this.props
     axios.get(URL + id)
       .then(({ data })  => {
-        this.setState({ imageLink: data["Poster"] });
+        this.setState({ imageLink: data["Poster"], id});
       })
       .catch((err) => 
         console.log(err)
     );
+  }
+  componentWillReceiveProps(props) {
+    let { id } = props
+    
+    if (id !== this.state.id) {
+      axios.get(URL + id)
+        .then(({ data })  => {
+          this.setState({ imageLink: data["Poster"], id});
+        })
+        .catch((err) => 
+          console.log(err)
+      );
+      console.log("getting props ");
+    }
   }
   render() {
     let {imageLink} = this.state;
