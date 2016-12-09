@@ -15,6 +15,15 @@ class App extends React.Component {
       season: "",
       filteredEpisodes: null,
     };
+
+    this.filter = this.filter.bind(this);
+  }
+  filter(char) {
+    if (char === "ALL") {
+      this.setState({filteredEpisodes: null})
+    } else {
+      
+    }
   }
   componentDidMount() {
     axios.get(URL)
@@ -35,7 +44,7 @@ class App extends React.Component {
   }
 
   render() {
-    let {episodes, title, season} = this.state;
+    let {episodes, title, season, filteredEpisodes} = this.state;
 
     if (!episodes) {
       return (
@@ -61,9 +70,9 @@ class App extends React.Component {
         <h2 className="text-center">{title}</h2>
         <h4 className="text-center">Season: {season}</h4>
         <Row> 
-          <Filter titles={titles}/>
+          <Filter titles={titles} filter={this.filter} />
           <Col xs={10} md={10}>
-            {listEpisodes}
+            {filteredEpisodes || listEpisodes}
           </Col>
         </Row>
       </div>

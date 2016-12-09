@@ -1,32 +1,38 @@
 import React from 'react';
 import {Col, Button} from 'react-bootstrap';
 
-const Filter = (props) => {
+const Filter = ({titles, filter}) => {
   let btns = [
                 <div key={1} >
                   <Button 
-                    bsStyle="default">
+                    bsStyle="default"
+                    value="ALL"
+                    onClick={(e) => filter(e.target.value)}
+                  >
                     ALL
                   </Button>
                 </div>
               ];
   let firstLetter = {}
-   props.titles.sort((a, b) => {
+  titles.sort((a, b) => {
     if (a < b) return -1;
     if (a > b) return 1;
     return 0;
    });
-  props.titles.forEach((val) => {
-    let firstChar = val[0];
+  titles.forEach((val) => {
+    let firstChar = val[0].toUpperCase();
     firstLetter[firstChar] = 0;
   });
 
-  for (let keys in firstLetter) {
+  for (let letter in firstLetter) {
     btns.push (
       <div key={btns.length + 1} >
         <Button  
-          bsStyle="default">
-          {keys}
+          bsStyle="default"
+          value={letter}
+          onClick={(e) => filter(e.target.value)}
+        >
+          {letter}
         </Button>  
       </div>
     );
@@ -40,6 +46,7 @@ const Filter = (props) => {
 
 Filter.propTypes = {
   titles: React.PropTypes.array.isRequired,
+  filter: React.PropTypes.func.isRequired,
 };
 export default Filter;
 
