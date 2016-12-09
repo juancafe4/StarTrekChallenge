@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import Episode from './Episode';
 const URL = "http://www.omdbapi.com/?i=tt0092455&season=4&ref_=tt_eps_sn_4";
 
 
@@ -14,9 +14,9 @@ class App extends React.Component {
   componentDidMount() {
     axios.get(URL)
     .then(({data})  => {
-      let episodes = data["Episodes"].map(val => {
+      let episodes = data["Episodes"].map((val) => {
         let obj = {};
-        obj["Title"] = val["Title"];
+        obj["imdbID"] = val["Title"];
         obj["imdbRating"] = val["imdbRating"];
         obj["imdbID"] = val["imdbID"];
         return obj;
@@ -31,16 +31,18 @@ class App extends React.Component {
 
   render() {
     let {episodes} = this.state;
-    let lis = []
-    lis = episodes.map((val, index) =>
-      <li key={index + 1}>
-        <h3>{val.Title}</h3>
-        <h4>{val.imdbRating}</h4>
-      </li>
+    
+    let listEpisodes = episodes.map((val, index) =>
+      <Episode 
+        key={index + 1}
+        id={val["imdbID"]}
+        title={val["Title"]}
+        rating={val["imdbRating"]}
+      />
     );
     return (
       <ul>
-        {lis}
+        {listEpisodes}
       </ul>
     );
   }
