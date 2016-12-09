@@ -30,6 +30,7 @@ class Episode extends React.Component {
         <ProgressBar active now={50} />
       );
     }
+
     return (
       <Thumbnail src={imageLink}>
         <h5>{title}</h5>
