@@ -3,8 +3,8 @@ import axios from 'axios';
 import {ProgressBar, Row, Col} from 'react-bootstrap';
 import Episode from './Episode';
 import Filter from './Filter';
-const URL = "http://www.omdbapi.com/?i=tt0092455&season=4&ref_=tt_eps_sn_4";
 
+const URL = "http://www.omdbapi.com/?i=tt0092455&season=4&ref_=tt_eps_sn_4";
 
 class App extends React.Component {
   constructor(props) {
@@ -19,10 +19,16 @@ class App extends React.Component {
     this.filter = this.filter.bind(this);
   }
   filter(char) {
+    let {episodes} = this.state;
+
     if (char === "ALL") {
       this.setState({filteredEpisodes: null})
     } else {
-      
+      let filteredEpisodes = episodes.filter((ep) =>
+        char === ep["Title"][0].toUpperCase()
+      );
+      console.log(filteredEpisodes)
+      this.setState({filteredEpisodes})
     }
   }
   componentDidMount() {
@@ -54,8 +60,9 @@ class App extends React.Component {
         </div>
       );
     }
-
-    let listEpisodes = episodes.map((val, index) =>
+    
+    let eps = filteredEpisodes || episodes;
+    let listEpisodes = eps.map((val, index) =>
       <Col key={index + 1} xs={10} sm={6} md={4}>
         <Episode 
           id={val["imdbID"]}
@@ -64,6 +71,7 @@ class App extends React.Component {
         />
       </Col>
     );
+    
     let titles = episodes.map((val) => val["Title"]);
     return (
       <div className="container">
@@ -72,7 +80,7 @@ class App extends React.Component {
         <Row> 
           <Filter titles={titles} filter={this.filter} />
           <Col xs={10} md={10}>
-            {filteredEpisodes || listEpisodes}
+            {listEpisodes}
           </Col>
         </Row>
       </div>
