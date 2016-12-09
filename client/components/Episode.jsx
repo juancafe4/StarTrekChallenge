@@ -22,7 +22,7 @@ class Episode extends React.Component {
     );
   }
   render() {
-    let imageLink = this.state;
+    let {imageLink} = this.state;
     let { title, rating } = this.props;
 
     if (!imageLink) {
@@ -31,9 +31,9 @@ class Episode extends React.Component {
       );
     }
     return (
-      <Thumbnail src={ imageLink }>
-        <h3>{ Title }</h3>
-        <p>{Rating}</p>
+      <Thumbnail src={imageLink}>
+        <h3>{title}</h3>
+        <p>⭐{rating}/10</p>
         <p>
           <Button bsStyle="success">More Details</Button>
         </p>
@@ -43,8 +43,8 @@ class Episode extends React.Component {
 }
 
 Episode.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  rating: React.PropTypes.number.isRequired,
-  id: React.PropTypes.string.isRequired,
+  title: React.PropTypes.string,
+  rating: React.PropTypes.string,
+  id: React.PropTypes.string,
 };
 export default Episode;
