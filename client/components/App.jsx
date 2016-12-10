@@ -11,6 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      defaultEpisodes: null,
       episodes: null,
       title: "",
       season: "",
@@ -21,7 +22,7 @@ class App extends React.Component {
     this.sortEpisodes = this.sortEpisodes.bind(this);
   }
   filter(char) {
-    let {episodes} = this.state;
+    let { episodes } = this.state;
 
     if (char === "ALL") {
       this.setState({filteredEpisodes: null})
@@ -33,7 +34,35 @@ class App extends React.Component {
     }
   }
   sortEpisodes(ep) {
-    console.log("episode ", ep)
+    // 1 Default
+    // 2 Sort by name alphabetically
+    // 3 Sort by rating highest to lowest
+
+    let { episodes,  defaultEpisodes} = this.state;
+
+    switch (ep) {
+      case '1':
+         this.setState({ episodes: defaultEpisodes });
+        break;
+      case '2':
+        episodes.sort((a, b) => {
+          if (a["Title"] < b["Title"]) return -1;
+          if (a["Title"] > b["Title"]) return 1;
+          return 0;
+        });
+        this.setState({ episodes });
+        break;
+      case '3':
+        episodes.sort((a, b) => {
+          if (a["imdbRating"] < b["imdbRating"]) return 1;
+          if (a["imdbRating"] > b["imdbRating"]) return -1;
+          return 0;
+        });
+        this.setState({ episodes });
+        break;
+      default:
+        break;
+    }
   }
   componentDidMount() {
     axios.get(URL)
@@ -46,7 +75,10 @@ class App extends React.Component {
         return obj;
       });
 
-      this.setState({episodes, title: data["Title"], season: data["Season"]})
+      this.setState({episodes, 
+                    defaultEpisodes: episodes,
+                    title: data["Title"], 
+                    season: data["Season"]})
     })
     .catch((error) =>
       console.log(error)

@@ -25,7 +25,7 @@ class Episode extends React.Component {
   componentWillReceiveProps(props) {
     let { id } = props
     
-    if (id !== this.state.id) {
+    //if (id !== this.state.id) {
       axios.get(URL + id)
         .then(({ data })  => {
           this.setState({ imageLink: data["Poster"], id});
@@ -33,8 +33,7 @@ class Episode extends React.Component {
         .catch((err) => 
           console.log(err)
       );
-      console.log("getting props ");
-    }
+    //}
   }
   render() {
     let {imageLink} = this.state;
