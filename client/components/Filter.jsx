@@ -1,19 +1,19 @@
 import React from 'react';
-import {Col, Button} from 'react-bootstrap';
+import { Col, Button } from 'react-bootstrap';
 
-const Filter = ({titles, filter}) => {
-  let btns = [
-                <div key={1} >
-                  <Button 
-                    bsStyle="default"
-                    value="ALL"
-                    onClick={(e) => filter(e.target.value)}
-                  >
-                    ALL
-                  </Button>
-                </div>
-              ];
-  let firstLetter = {}
+const Filter = ({ titles, filter }) => {
+  const btns = [
+    <div key={1} >
+      <Button
+        bsStyle="default"
+        value="ALL"
+        onClick={(e) => filter(e.target.value)}
+      >
+        ALL
+      </Button>
+    </div>
+  ];
+  let firstLetter = {};
   titles.sort((a, b) => {
     if (a < b) return -1;
     if (a > b) return 1;
@@ -24,7 +24,7 @@ const Filter = ({titles, filter}) => {
     firstLetter[firstChar] = 0;
   });
 
-  for (let letter in firstLetter) {
+  for (const letter in firstLetter) {
     btns.push (
       <div key={btns.length + 1} >
         <Button  
@@ -33,7 +33,7 @@ const Filter = ({titles, filter}) => {
           onClick={(e) => filter(e.target.value)}
         >
           {letter}
-        </Button>  
+        </Button>
       </div>
     );
   }
@@ -42,11 +42,10 @@ const Filter = ({titles, filter}) => {
       {btns}
     </Col>
   );
-}
+};
 
 Filter.propTypes = {
   titles: React.PropTypes.array.isRequired,
   filter: React.PropTypes.func.isRequired,
 };
 export default Filter;
-
