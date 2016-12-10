@@ -64,7 +64,10 @@ class App extends React.Component {
     switch (ep) {
       case '1':
         episodes = [...defaultEpisodes];
-        filteredEpisodes = [...defaultFilteredEpisodes];
+
+        if (filteredEpisodes) {
+          filteredEpisodes = [...defaultFilteredEpisodes];
+        }
         break;
       case '2':
         episodes.sort((a, b) => {
