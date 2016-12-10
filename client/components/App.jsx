@@ -81,10 +81,20 @@ class App extends React.Component {
       <div className="container">
         <h2 className="text-center">{title}</h2>
         <h4 className="text-center">Season: {season}</h4>
-        <Sort sortEpisodes={this.sortEpisodes}/>
+        
+        <Row>
+          <Col xs={1}>
+            
+          </Col>
+          <Col xs={4}>      
+              <h4>Sort By: </h4> 
+              <Sort sortEpisodes={this.sortEpisodes}/>
+         </Col>
+        </Row>
+        <br/>
         <Row> 
           <Filter titles={titles} filter={this.filter} />
-          <Col xs={10} md={10}>
+          <Col xs={10}>
             {listEpisodes}
           </Col>
         </Row>

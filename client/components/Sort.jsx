@@ -10,7 +10,6 @@ class Sort extends React.Component {
     this.change = this.change.bind(this);
   }
   change(e) {
-    console.log(e)
     let val = e.target.value;
     this.setState({sort: val});
     this.props.sortEpisodes(val);
@@ -19,7 +18,7 @@ class Sort extends React.Component {
     let {sortEpisodes} = this.props; 
     return (
       <select 
-        onChange={(e) => this.change}
+        onChange={this.change}
         value={this.state.sort}
         className="form-control"
       >
