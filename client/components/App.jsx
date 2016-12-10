@@ -3,6 +3,7 @@ import axios from 'axios';
 import {ProgressBar, Row, Col} from 'react-bootstrap';
 import Episode from './Episode';
 import Filter from './Filter';
+import Sort from './Sort';
 
 const URL = "http://www.omdbapi.com/?i=tt0092455&season=4&ref_=tt_eps_sn_4";
 
@@ -17,6 +18,7 @@ class App extends React.Component {
     };
 
     this.filter = this.filter.bind(this);
+    this.sortEpisodes = this.sortEpisodes.bind(this);
   }
   filter(char) {
     let {episodes} = this.state;
@@ -29,6 +31,9 @@ class App extends React.Component {
       );
       this.setState({filteredEpisodes})
     }
+  }
+  sortEpisodes(ep) {
+    console.log("episode ", ep)
   }
   componentDidMount() {
     axios.get(URL)
@@ -76,6 +81,7 @@ class App extends React.Component {
       <div className="container">
         <h2 className="text-center">{title}</h2>
         <h4 className="text-center">Season: {season}</h4>
+        <Sort sortEpisodes={this.sortEpisodes}/>
         <Row> 
           <Filter titles={titles} filter={this.filter} />
           <Col xs={10} md={10}>
