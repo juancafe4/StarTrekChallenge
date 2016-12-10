@@ -43,15 +43,18 @@ class App extends React.Component {
     );
   }
   filter(char) {
-    const { episodes } = this.state;
+    const { episodes, defaultEpisodes } = this.state;
 
     if (char === 'ALL') {
       this.setState({ filteredEpisodes: null, defaultFilteredEpisodes: null });
     } else {
+      const defaultFilteredEpisodes = defaultEpisodes.filter(ep =>
+        char === ep.Title[0].toUpperCase(),
+      );
       const filteredEpisodes = episodes.filter(ep =>
         char === ep.Title[0].toUpperCase(),
       );
-      this.setState({ filteredEpisodes, defaultFilteredEpisodes: [...filteredEpisodes] });
+      this.setState({ filteredEpisodes, defaultFilteredEpisodes });
     }
   }
   sortEpisodes(ep) {
