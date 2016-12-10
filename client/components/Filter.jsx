@@ -7,36 +7,36 @@ const Filter = ({ titles, filter }) => {
       <Button
         bsStyle="default"
         value="ALL"
-        onClick={(e) => filter(e.target.value)}
+        onClick={e => filter(e.target.value)}
       >
         ALL
       </Button>
-    </div>
+    </div>,
   ];
-  let firstLetter = {};
+  const firstLetter = {};
   titles.sort((a, b) => {
     if (a < b) return -1;
     if (a > b) return 1;
     return 0;
-   });
+  });
   titles.forEach((val) => {
-    let firstChar = val[0].toUpperCase();
+    const firstChar = val[0].toUpperCase();
     firstLetter[firstChar] = 0;
   });
 
-  for (const letter in firstLetter) {
-    btns.push (
+  Object.keys(firstLetter).forEach((letter) => {
+    btns.push(
       <div key={btns.length + 1} >
-        <Button  
+        <Button
           bsStyle="default"
           value={letter}
-          onClick={(e) => filter(e.target.value)}
+          onClick={e => filter(e.target.value)}
         >
           {letter}
         </Button>
-      </div>
+      </div>,
     );
-  }
+  });
   return (
     <Col xs={1} sm={1} md={1} lg={1}>
       {btns}

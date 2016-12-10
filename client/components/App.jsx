@@ -35,23 +35,23 @@ class App extends React.Component {
 
       this.setState({ episodes,
         defaultEpisodes: [...episodes],
-        title: data.Title, 
-        season: data.Season })
+        title: data.Title,
+        season: data.Season });
     })
-    .catch((error) =>
+    .catch(error =>
       console.log(error),
     );
   }
   filter(char) {
-    let { episodes } = this.state;
+    const { episodes } = this.state;
 
-    if (char === "ALL") {
-      this.setState({filteredEpisodes: null, defaultFilteredEpisodes: null});
+    if (char === 'ALL') {
+      this.setState({ filteredEpisodes: null, defaultFilteredEpisodes: null });
     } else {
-      let filteredEpisodes = episodes.filter((ep) =>
-        char === ep["Title"][0].toUpperCase()
+      const filteredEpisodes = episodes.filter(ep =>
+        char === ep.Title[0].toUpperCase(),
       );
-      this.setState({filteredEpisodes, defaultFilteredEpisodes: [...filteredEpisodes]});
+      this.setState({ filteredEpisodes, defaultFilteredEpisodes: [...filteredEpisodes] });
     }
   }
   sortEpisodes(ep) {
@@ -59,26 +59,26 @@ class App extends React.Component {
     // 2 Sort by name alphabetically
     // 3 Sort by rating highest to lowest
 
-    let { episodes,  defaultEpisodes, filteredEpisodes, defaultFilteredEpisodes} = this.state;
-
+    const { defaultEpisodes, defaultFilteredEpisodes } = this.state;
+    let { episodes, filteredEpisodes } = this.state;
     switch (ep) {
       case '1':
         episodes = [...defaultEpisodes];
-        filteredEpisodes = [...defaultFilteredEpisodes]
+        filteredEpisodes = [...defaultFilteredEpisodes];
         break;
       case '2':
         episodes.sort((a, b) => {
           if (a.Title < b.Title) return -1;
           if (a.Title > b.Title) return 1;
           return 0;
-        }); 
+        });
 
         if (filteredEpisodes) {
           filteredEpisodes.sort((a, b) => {
             if (a.Title < b.Title) return -1;
             if (a.Title > b.Title) return 1;
             return 0;
-          }); 
+          });
         }
         break;
       case '3':
@@ -103,7 +103,7 @@ class App extends React.Component {
 
 
   render() {
-    let {episodes, title, season, filteredEpisodes} = this.state;
+    const { episodes, title, season, filteredEpisodes } = this.state;
 
     if (!episodes) {
       return (
@@ -113,29 +113,29 @@ class App extends React.Component {
         </div>
       );
     }
-    
-    let eps = filteredEpisodes || episodes;
-    let listEpisodes = eps.map((val, index) =>
+
+    const eps = filteredEpisodes || episodes;
+    const listEpisodes = eps.map((val, index) =>
       <Col key={index + 1} xs={10} sm={6} md={4}>
         <Episode
           id={val.imdbID}
           title={val.Title}
           rating={val.imdbRating}
         />
-      </Col>
+      </Col>,
     );
-    
-    let titles = episodes.map((val) => val.Title);
+
+    const titles = episodes.map(val => val.Title);
     return (
       <div className="container">
         <h2 className="text-center">{title}</h2>
         <h4 className="text-center">Season: {season}</h4>
-        
+
         <Row>
-          <Col xs={4}>      
-              <h4>Sort By: </h4>
-              <Sort sortEpisodes={this.sortEpisodes} />
-         </Col>
+          <Col xs={4}>
+            <h4>Sort By: </h4>
+            <Sort sortEpisodes={this.sortEpisodes} />
+          </Col>
         </Row>
         <br />
         <Row>

@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import {Thumbnail, Button, ProgressBar} from 'react-bootstrap';
+import { Thumbnail, Button, ProgressBar } from 'react-bootstrap';
 
-const URL = "http://www.omdbapi.com/?i=";
+const URL = 'http://www.omdbapi.com/?i=';
 
 class Episode extends React.Component {
   constructor(props) {
@@ -13,31 +13,31 @@ class Episode extends React.Component {
     };
   }
   componentDidMount() {
-    let { id } = this.props
+    const { id } = this.props;
     axios.get(URL + id)
-      .then(({ data })  => {
-        this.setState({ imageLink: data["Poster"], id});
+      .then(({ data }) => {
+        this.setState({ imageLink: data.Poster, id });
       })
-      .catch((err) => 
-        console.log(err)
+      .catch(err =>
+        console.log(err),
     );
   }
   componentWillReceiveProps(props) {
-    let { id } = props
-    
+    const { id } = props;
+
     if (id !== this.state.id) {
       axios.get(URL + id)
-        .then(({ data })  => {
-          this.setState({ imageLink: data["Poster"], id});
-        })
-        .catch((err) => 
-          console.log(err)
+        .then(res =>
+          this.setState({ imageLink: res.data.Poster, id }),
+        )
+        .catch(err =>
+          console.log(err),
       );
     }
   }
   render() {
-    let {imageLink} = this.state;
-    let { title, rating } = this.props;
+    const { imageLink } = this.state;
+    const { title, rating } = this.props;
 
     if (!imageLink) {
       return (
