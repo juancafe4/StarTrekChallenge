@@ -41,18 +41,3 @@ http://localhost:8000
 * [Express](https://expressjs.com/)
 * [Webpack](https://webpack.github.io/)
 * [Bootstrap](http://getbootstrap.com/)
-
-## Authors
-
-* **Juan Carlos Ferrel** - [Profile](https://github.com/juancafe4)
-* **Hyein Yoo** - [Profile](https://github.com/hyeinu)
-* **Danny Lim** - [Profile](https://github.com/dalime)
-* **Dhilipanraja Joseph** - [Profile](https://github.com/dhilipanraja-joseph)
-
-## License
-
-This project is licensed under the ISC License.
-
-## Deployed On
-
-[Heroku](http://bookshare-app.herokuapp.com/)
