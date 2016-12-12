@@ -10,6 +10,16 @@ const URL = 'http://www.omdbapi.com/?i=tt0092455&season=4&ref_=tt_eps_sn_4';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    // There are a total of 5 states.
+    // title => title of the TV show.
+    // season => season of the TV show.
+    // episodes => array of objects number of episodes
+    // defaultEpisodes => array of objects it backs up the original
+    // list of episodes. When the user clicks default, episodes are assigned by defaultEpisodes
+    // and restore to their original order.
+    // filteredEpisodes => the number of episodes that are filtered by first letter.
+    // defaultFilteredEpisodes => same as defaultEpisodes but for filtered episodes
     this.state = {
       defaultEpisodes: null,
       episodes: null,
@@ -22,10 +32,14 @@ class App extends React.Component {
     this.filter = this.filter.bind(this);
     this.sortEpisodes = this.sortEpisodes.bind(this);
   }
+
   componentDidMount() {
+    // After the component is rendered, get the 
+    // data and change the state to display the episodes
     axios.get(URL)
     .then(({ data }) => {
       const episodes = data.Episodes.map((val) => {
+        //
         const obj = {};
         obj.Title = val.Title;
         obj.imdbRating = Number(val.imdbRating);
@@ -42,9 +56,13 @@ class App extends React.Component {
       console.log(error),
     );
   }
+
+  // This function filter episodes by first letter title.
   filter(char) {
     const { episodes, defaultEpisodes } = this.state;
 
+    // filteredEpisodes is set to null if the user 
+    // wants to see all the episodes
     if (char === 'ALL') {
       this.setState({ filteredEpisodes: null, defaultFilteredEpisodes: null });
     } else {
@@ -64,6 +82,7 @@ class App extends React.Component {
 
     const { defaultEpisodes, defaultFilteredEpisodes } = this.state;
     let { episodes, filteredEpisodes } = this.state;
+
     switch (ep) {
       case '1':
         episodes = [...defaultEpisodes];
@@ -112,6 +131,7 @@ class App extends React.Component {
     const { episodes, title, season, filteredEpisodes } = this.state;
 
     if (!episodes) {
+      // loading bar
       return (
         <div>
           <h3 className="text-center">Loading... </h3>

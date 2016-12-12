@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Button } from 'react-bootstrap';
 
+// This component filters out the episode by first letter
 const Filter = ({ titles, filter }) => {
   const btns = [
     <div key={1} >

@@ -1,5 +1,6 @@
 import React from 'react';
 
+//This component sort the epsidoes by name or rating
 class Sort extends React.Component {
   constructor(props) {
     super(props);

@@ -12,6 +12,8 @@ class Episode extends React.Component {
       id: '',
     };
   }
+
+  //Gets the link of the poster of the episode
   componentDidMount() {
     const { id } = this.props;
     axios.get(URL + id)
