@@ -23,12 +23,12 @@ Navigate into cloned directory and install npm packages.
 $ cd StarTrekChallenge
 $ npm install
 ```
-To start the server
+To start the server:
 ```
 npm start
 ```
 
-View in the application. Go to URL.
+In your browser go to:
 
 ```
 http://localhost:8000
