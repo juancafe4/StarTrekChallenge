@@ -14,9 +14,9 @@ module.exports = {
     filename: 'bundle.js',
   },
   target: 'web',
-  eslint: {
-  configFile: './.eslintrc'
-  },
+  // eslint: {
+  // configFile: './.eslintrc'
+  // },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
